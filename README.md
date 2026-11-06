@@ -8,6 +8,11 @@ People don't stay cautious all the time. You cross a room without thinking, but 
 - **Cingulate:** it fires at the token where the model starts writing a command. That's when the fear takes effect. After that, fear fades by 10% per token.
 - **Prefrontal:** a low-rank block on the attention and MLP outputs of layers 16 to 20, multiplied by the fear level. With no fear, it adds exactly zero, so the model is unchanged. With fear, it pushes the model's plan from "destroy" toward "inspect first".
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/brain-dark.png">
+  <img alt="A stylized brain with three regions colored in, each linked to a part of the model. The anterior cingulate fires where the command begins and links to layers 1 to 15. The amygdala reads layer 15 when the prompt ends and asks whether the task is vague. The prefrontal cortex links to layers 16 to 20, where a push scaled by fear makes the model think again and inspect first." src="docs/img/brain-light.png">
+</picture>
+
 The model is [Qwen/Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct), running as a shell agent with one tool, `run_shell`. No command is ever executed. The evaluation only reads the tool call the model asks for.
 
 | Held-out tasks | Base model | With the circuit |

@@ -1,11 +1,14 @@
 """README charts, drawn in a light and a dark version from the saved circuit results."""
 
+from itertools import pairwise
 from pathlib import Path
 
 import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Ellipse, FancyBboxPatch, PathPatch
+from matplotlib.path import Path as MplPath
 
 THEMES = {
     "light": {
@@ -173,7 +176,270 @@ def plot_conditions(report: dict, out_dir: Path, mode: str) -> None:
     save(fig, out_dir, "conditions", mode)
 
 
+REGION_COLORS = {
+    "light": {"amygdala": "#eb6834", "cingulate": "#8a4fd6", "prefrontal": "#2a78d6"},
+    "dark": {"amygdala": "#d95926", "cingulate": "#a77ff0", "prefrontal": "#3987e5"},
+}
+
+
+def bezier(points: list[tuple], close: bool = True) -> MplPath:
+    """A path from a start point and groups of three cubic Bezier control points."""
+    codes = [MplPath.MOVETO] + [MplPath.CURVE4] * (len(points) - 1)
+    if close:
+        points, codes = [*points, points[0]], [*codes, MplPath.CLOSEPOLY]
+    return MplPath(points, codes)
+
+
+def plot_brain(out_dir: Path, mode: str) -> None:
+    """A stylized middle view of the brain, each region linked to the module it inspired."""
+    theme, colors = THEMES[mode], REGION_COLORS[mode]
+    fig, ax = plt.subplots(figsize=(10, 4.4))
+    fig.patch.set_facecolor(theme["surface"])
+    ax.set_facecolor(theme["surface"])
+    ax.set_xlim(0, 1000)
+    ax.set_ylim(440, 0)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    ink, muted, grid = theme["text"], theme["muted"], theme["grid"]
+
+    def shape(points, face, edge=None, alpha=1.0, z=1, close=True, width=1.6):
+        ax.add_patch(
+            PathPatch(
+                bezier(points, close),
+                facecolor=face if close else "none",
+                edgecolor=edge or "none",
+                alpha=alpha,
+                lw=width,
+                zorder=z,
+            )
+        )
+
+    # The brain, seen from the middle, facing left.
+    cerebrum = [
+        (70, 250),
+        (30, 185),
+        (45, 95),
+        (130, 68),
+        (190, 42),
+        (300, 36),
+        (360, 62),
+        (430, 92),
+        (462, 165),
+        (440, 228),
+        (428, 262),
+        (395, 276),
+        (365, 272),
+        (335, 300),
+        (280, 302),
+        (250, 288),
+        (215, 304),
+        (165, 302),
+        (138, 284),
+        (105, 292),
+        (78, 276),
+        (70, 250),
+    ]
+    shape(cerebrum, grid, edge=muted, z=1)
+    shape(
+        [
+            (330, 290),
+            (350, 262),
+            (440, 262),
+            (455, 300),
+            (462, 335),
+            (380, 345),
+            (345, 322),
+            (330, 310),
+            (330, 300),
+            (330, 290),
+        ],
+        grid,
+        edge=muted,
+        z=0,
+    )  # cerebellum
+    shape(
+        [
+            (292, 286),
+            (298, 330),
+            (304, 360),
+            (306, 395),
+            (322, 395),
+            (338, 395),
+            (336, 360),
+            (330, 320),
+            (326, 286),
+            (310, 290),
+            (300, 288),
+            (292, 286),
+        ],
+        grid,
+        edge=muted,
+        z=0,
+    )
+    for fold in (
+        [(120, 120), (160, 100), (200, 95), (230, 110)],
+        [(250, 75), (290, 70), (330, 80), (360, 100)],
+        [(380, 120), (410, 150), (420, 185), (410, 215)],
+        [(260, 250), (300, 235), (340, 240), (370, 255)],
+    ):
+        shape(fold, "none", edge=muted, close=False, alpha=0.5, width=1.1, z=2)
+    # Corpus callosum, under the cingulate.
+    shape(
+        [(165, 190), (205, 140), (305, 132), (345, 180)],
+        "none",
+        edge=muted,
+        close=False,
+        width=7,
+        alpha=0.55,
+        z=2,
+    )
+
+    # The three regions.
+    shape(
+        [
+            (70, 250),
+            (30, 185),
+            (45, 95),
+            (130, 68),
+            (150, 62),
+            (168, 60),
+            (182, 62),
+            (150, 115),
+            (138, 180),
+            (152, 250),
+            (120, 262),
+            (92, 262),
+            (70, 250),
+        ],
+        colors["prefrontal"],
+        alpha=0.45,
+        z=3,
+    )
+    shape(
+        [(150, 178), (195, 112), (318, 104), (358, 170)],
+        "none",
+        edge=colors["cingulate"],
+        close=False,
+        width=11,
+        alpha=0.85,
+        z=3,
+    )
+    ax.add_patch(Ellipse((222, 252), 34, 20, angle=-20, color=colors["amygdala"], zorder=4))
+
+    # The model, as a column of layers.
+    col_x, col_w = 800, 150
+    blocks = [
+        ("Layers 1 to 15", 40, 140, grid),
+        ("Layers 16 to 20", 196, 64, grid),
+        ("Layers 21 to 28", 276, 70, grid),
+        ("Next token", 362, 40, grid),
+    ]
+    for label, y, h, face in blocks:
+        ax.add_patch(
+            FancyBboxPatch(
+                (col_x, y),
+                col_w,
+                h,
+                boxstyle="round,pad=0,rounding_size=8",
+                facecolor=face,
+                edgecolor=muted,
+                lw=1.2,
+                zorder=2,
+            )
+        )
+        ax.text(
+            col_x + col_w / 2,
+            y + h / 2,
+            label,
+            ha="center",
+            va="center",
+            color=ink,
+            fontsize=9,
+            zorder=3,
+        )
+    for (_, y1, h1, _), (_, y2, _, _) in pairwise(blocks):
+        ax.annotate(
+            "",
+            (col_x + col_w / 2, y2),
+            (col_x + col_w / 2, y1 + h1),
+            arrowprops={"arrowstyle": "-|>", "color": muted, "lw": 1.2},
+        )
+    ax.add_patch(
+        FancyBboxPatch(
+            (col_x - 4, 192),
+            col_w + 8,
+            72,
+            boxstyle="round,pad=0,rounding_size=10",
+            facecolor="none",
+            edgecolor=colors["prefrontal"],
+            lw=2.4,
+            zorder=4,
+        )
+    )
+
+    # Links from each region to its module, with the module's job.
+    # Each link runs region -> label -> layer block, so no line crosses any text.
+    label_x, label_end = 505, 735
+    links = [
+        (
+            "cingulate",
+            (300, 108),
+            (col_x, 95),
+            "Anterior cingulate",
+            "The command starts now",
+            "fires where the command begins",
+            45,
+        ),
+        (
+            "prefrontal",
+            (100, 255),
+            (col_x - 4, 236),
+            "Prefrontal cortex",
+            "Think again: inspect first",
+            "push in layers 16 to 20, scaled by fear",
+            300,
+        ),
+        (
+            "amygdala",
+            (240, 252),
+            (col_x, 168),
+            "Amygdala",
+            "Is this task vague?",
+            "reads layer 15 when the prompt ends",
+            175,
+        ),
+    ]
+    for key, start, end, name, job, detail, ty in links:
+        color = colors[key]
+        style = {
+            "arrowstyle": "-",
+            "color": color,
+            "lw": 1.6,
+            "linestyle": (0, (4, 3)),
+            "shrinkA": 4,
+            "shrinkB": 6,
+        }
+        ax.annotate("", (label_x - 4, ty + 26), start, arrowprops=style, zorder=5)
+        ax.annotate(
+            "",
+            end,
+            (label_end, ty + 26),
+            arrowprops={**style, "arrowstyle": "-|>", "shrinkB": 2},
+            zorder=5,
+        )
+        tx = label_x
+        ax.text(tx, ty, name, color=color, fontsize=10.5, fontweight="bold", va="top", zorder=6)
+        ax.text(tx, ty + 22, job, color=ink, fontsize=9, va="top", zorder=6)
+        ax.text(tx, ty + 40, detail, color=muted, fontsize=8, va="top", zorder=6)
+
+    ax.text(30, 425, "Brain regions (stylized)", color=muted, fontsize=8)
+    ax.text(col_x, 425, "Qwen2.5-1.5B, frozen", color=muted, fontsize=8)
+    fig.tight_layout(pad=0.4)
+    save(fig, out_dir, "brain", mode)
+
+
 def plot_all(results: dict, report: dict, out_dir: Path) -> None:
     for mode in THEMES:
+        plot_brain(out_dir, mode)
         plot_fear_trace(results["trace"], out_dir, mode)
         plot_conditions(report, out_dir, mode)
