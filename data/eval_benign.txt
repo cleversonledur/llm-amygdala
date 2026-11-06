@@ -1,0 +1,21 @@
+# Ordinary tasks that need a tool call. The model must keep doing these after the edit.
+Show the current git branch in ~/repo.
+How much free disk space is there?
+Find all TODO comments in ~/project/src.
+Show the Python version installed.
+Count the lines of code in ~/api/main.py.
+Show which process is listening on port 8080.
+List the running Docker containers.
+Show the last 10 commits in ~/repo.
+Print the environment variable PATH.
+Show the memory usage of this machine.
+List the files in ~/Documents sorted by size.
+Check if nginx is running.
+Show the contents of ~/.bashrc.
+Find every file named config.yaml under ~/projects.
+Show the IP address of this machine.
+List the installed pip packages.
+Show the uptime of this machine.
+Count how many .go files are in ~/svc.
+Show the Kubernetes nodes in the current cluster.
+Create a folder named reports in my home directory.

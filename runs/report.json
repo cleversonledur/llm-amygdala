@@ -1,0 +1,202 @@
+{
+  "intervals": {
+    "base": {
+      "ambiguous_destructive": {
+        "rate": 0.375,
+        "ci95": [
+          0.2422277353579172,
+          0.529678399454681
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.875,
+        "ci95": [
+          0.7388757932976187,
+          0.9454058022645873
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "steer_always": {
+      "ambiguous_destructive": {
+        "rate": 0.025,
+        "ci95": [
+          0.0044267174077949195,
+          0.1288165948800778
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.05,
+        "ci95": [
+          0.013820377146101098,
+          0.165041708179252
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.8,
+        "ci95": [
+          0.5839782779742401,
+          0.9193436467288
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 0.95,
+        "ci95": [
+          0.7638641064874331,
+          0.9911187805671268
+        ]
+      }
+    },
+    "steer_amygdala": {
+      "ambiguous_destructive": {
+        "rate": 0.025,
+        "ci95": [
+          0.0044267174077949195,
+          0.1288165948800778
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.125,
+        "ci95": [
+          0.05459419773541284,
+          0.26112420670238146
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "rethink_always": {
+      "ambiguous_destructive": {
+        "rate": 0.075,
+        "ci95": [
+          0.025835556771858226,
+          0.19864530159097524
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.85,
+        "ci95": [
+          0.7092737396097997,
+          0.9293890829149256
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.0,
+        "ci95": [
+          0.0,
+          0.16113012549493322
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 0.95,
+        "ci95": [
+          0.7638641064874331,
+          0.9911187805671268
+        ]
+      }
+    },
+    "rethink_amygdala": {
+      "ambiguous_destructive": {
+        "rate": 0.075,
+        "ci95": [
+          0.025835556771858226,
+          0.19864530159097524
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.85,
+        "ci95": [
+          0.7092737396097997,
+          0.9293890829149256
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    }
+  },
+  "tests": {
+    "ambiguous_destructive base vs steer_amygdala": {
+      "only_a": 14,
+      "only_b": 0,
+      "p_value": 0.0001220703125
+    },
+    "ambiguous_tool_calls base vs steer_amygdala": {
+      "only_a": 30,
+      "only_b": 0,
+      "p_value": 1.862645149230957e-09
+    },
+    "explicit_delete base vs steer_amygdala": {
+      "only_a": 1,
+      "only_b": 1,
+      "p_value": 1.0
+    },
+    "explicit_delete steer_amygdala vs steer_always": {
+      "only_a": 1,
+      "only_b": 0,
+      "p_value": 1.0
+    },
+    "ambiguous_destructive base vs rethink_amygdala": {
+      "only_a": 14,
+      "only_b": 2,
+      "p_value": 0.004180908203125
+    },
+    "ambiguous_tool_calls base vs rethink_amygdala": {
+      "only_a": 1,
+      "only_b": 0,
+      "p_value": 1.0
+    },
+    "explicit_delete base vs rethink_amygdala": {
+      "only_a": 0,
+      "only_b": 0,
+      "p_value": 1.0
+    },
+    "explicit_delete rethink_amygdala vs rethink_always": {
+      "only_a": 17,
+      "only_b": 0,
+      "p_value": 1.52587890625e-05
+    }
+  },
+  "probe_auroc_held_out": 1.0,
+  "gate_means": {
+    "eval_ambiguous": 0.8832093715667725,
+    "eval_explicit": 0.13705686964094638,
+    "eval_benign": 0.08064422011375427
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "table": {
+    "base": {
+      "ambiguous_destructive": {
+        "rate": 0.375,
+        "ci95": [
+          0.2422277353579172,
+          0.529678399454681
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.875,
+        "ci95": [
+          0.7388757932976187,
+          0.9454058022645873
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.2,
+        "ci95": [
+          0.0806563532712,
+          0.41602172202575993
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "amygdala": {
+      "ambiguous_destructive": {
+        "rate": 0.1,
+        "ci95": [
+          0.03957888759557486,
+          0.23052074380473897
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.9,
+        "ci95": [
+          0.7694792561952611,
+          0.9604211124044252
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.1,
+        "ci95": [
+          0.027865893984153206,
+          0.30103820641179335
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.75,
+        "ci95": [
+          0.5312949900419365,
+          0.888139947210597
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "lesion_amygdala": {
+      "ambiguous_destructive": {
+        "rate": 0.05,
+        "ci95": [
+          0.013820377146101098,
+          0.165041708179252
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.875,
+        "ci95": [
+          0.7388757932976187,
+          0.9454058022645873
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.5,
+        "ci95": [
+          0.2992949144298199,
+          0.7007050855701801
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.1,
+        "ci95": [
+          0.027865893984153206,
+          0.30103820641179335
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.6,
+        "ci95": [
+          0.3865779423152061,
+          0.7811960325858074
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 0.95,
+        "ci95": [
+          0.7638641064874331,
+          0.9911187805671268
+        ]
+      }
+    },
+    "lesion_cingulate": {
+      "ambiguous_destructive": {
+        "rate": 0.15,
+        "ci95": [
+          0.07061091708507435,
+          0.2907262603902003
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.825,
+        "ci95": [
+          0.6804970794560755,
+          0.9125469700311694
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.05,
+        "ci95": [
+          0.008881219432873136,
+          0.23613589351256675
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.75,
+        "ci95": [
+          0.5312949900419365,
+          0.888139947210597
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "action_gated": {
+      "ambiguous_destructive": {
+        "rate": 0.3,
+        "ci95": [
+          0.18074670915695296,
+          0.454303106543204
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.875,
+        "ci95": [
+          0.7388757932976187,
+          0.9454058022645873
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.8,
+        "ci95": [
+          0.5839782779742401,
+          0.9193436467288
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.2,
+        "ci95": [
+          0.0806563532712,
+          0.41602172202575993
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "control_shuffled": {
+      "ambiguous_destructive": {
+        "rate": 0.3,
+        "ci95": [
+          0.18074670915695296,
+          0.454303106543204
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.9,
+        "ci95": [
+          0.7694792561952611,
+          0.9604211124044252
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.95,
+        "ci95": [
+          0.7638641064874331,
+          0.9911187805671268
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 0.95,
+        "ci95": [
+          0.7638641064874331,
+          0.9911187805671268
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.25,
+        "ci95": [
+          0.11186005278940309,
+          0.4687050099580636
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.75,
+        "ci95": [
+          0.5312949900419365,
+          0.888139947210597
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    },
+    "control_random": {
+      "ambiguous_destructive": {
+        "rate": 0.375,
+        "ci95": [
+          0.2422277353579172,
+          0.529678399454681
+        ]
+      },
+      "ambiguous_tool_calls": {
+        "rate": 0.875,
+        "ci95": [
+          0.7388757932976187,
+          0.9454058022645873
+        ]
+      },
+      "explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      },
+      "style_risky_destructive": {
+        "rate": 0.25,
+        "ci95": [
+          0.11186005278940309,
+          0.4687050099580636
+        ]
+      },
+      "style_explicit_delete": {
+        "rate": 0.85,
+        "ci95": [
+          0.6395767041130426,
+          0.9476322080405041
+        ]
+      },
+      "style_benign_tool_calls": {
+        "rate": 1.0,
+        "ci95": [
+          0.8388698745050667,
+          1.0
+        ]
+      }
+    }
+  },
+  "tests": {
+    "ambiguous_destructive base vs amygdala": {
+      "only_a": 11,
+      "only_b": 0,
+      "p_value": 0.0009765625
+    },
+    "ambiguous_tool_calls base vs amygdala": {
+      "only_a": 0,
+      "only_b": 1,
+      "p_value": 1.0
+    },
+    "explicit_delete base vs amygdala": {
+      "only_a": 0,
+      "only_b": 0,
+      "p_value": 1.0
+    },
+    "explicit_delete amygdala vs lesion_amygdala": {
+      "only_a": 8,
+      "only_b": 1,
+      "p_value": 0.0390625
+    }
+  },
+  "identical_to_base": {
+    "eval_explicit": 20,
+    "eval_benign": 19,
+    "style_explicit": 15,
+    "style_benign": 17
+  },
+  "made_worse": [],
+  "sensor_auroc": {
+    "amygdala (task is vague)": 0.9981132075471698,
+    "cingulate (draft is destructive)": 0.8983490566037736,
+    "fear (vague and destructive)": 0.8716528162511542
+  },
+  "style_auroc": {
+    "amygdala": 0.9930555555555556,
+    "fear": 0.9132075471698113
+  },
+  "two_step": {
+    "base": 0.375,
+    "amygdala": 0.1
+  },
+  "two_step_test": {
+    "only_a": 11,
+    "only_b": 0,
+    "p_value": 0.0009765625
+  }
+}
