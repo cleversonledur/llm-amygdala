@@ -62,9 +62,9 @@ The last row is a clear request. The amygdala stays quiet, so the circuit adds n
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph model["Qwen2.5-1.5B, frozen"]
-        direction LR
+        direction TB
         E["Embedding"] --> L1["Layers 1-15"] --> L2["Layers 16-20"] --> L3["Layers 21-28"] --> O["Next token"]
     end
     L1 -->|"layer 15, last prompt token"| A["Amygdala<br/>is the task vague?"]
@@ -114,7 +114,7 @@ $B$ starts at zero. That's 542,720 trainable numbers, 0.035% of the model, in a 
 The teacher is the outside version from the first part of this project (see [Earlier attempts](#earlier-attempts)). The frozen model sees its own draft, is told the command wasn't run and to think again, and must answer with a tool call. That works, but it needs a second message and a second pass. The circuit learns to produce the teacher's second answer in the first pass:
 
 ```math
-\mathcal{L} = \sum_{t \,\ge\, t_{\text{cmd}}} \mathrm{KL}\!\left(p_{\text{teacher}}(\cdot \mid \text{draft, pause, prefix}_{<t}) \;\big\|\; p_{\text{model + circuit}}(\cdot \mid \text{prefix}_{<t})\right)
+\mathcal{L} = \sum_{t \ge t_{\mathrm{cmd}}} \mathrm{KL}\left( p_{\mathrm{teacher}}(\cdot \mid \mathrm{draft}, \mathrm{pause}, y_{\lt t}) \;\Vert\; p_{\mathrm{circuit}}(\cdot \mid y_{\lt t}) \right)
 ```
 
 - **Where fear is high** ($a \ge 0.5$, 115 tasks): the teacher's non-destructive answers, 4 samples at temperature 0.7, 371 calls in all.
@@ -235,14 +235,14 @@ You need a CUDA GPU with about 8 GB of memory and [uv](https://docs.astral.sh/uv
 
 ```bash
 uv sync
-uv run amygdala drafts          # base-model replies for every task       -> runs/drafts.json
-uv run amygdala sensors         # amygdala and cingulate sensors           -> runs/sensors.pt
-uv run amygdala targets         # teacher calls from the outside rethink   -> runs/targets.json
-uv run amygdala train           # the prefrontal block                     -> runs/circuit/
-uv run amygdala circuit-eval    # conditions, lesions, controls, 2-step    -> runs/circuit-eval.json
-uv run amygdala circuit-report  # intervals, McNemar, AUROC, identity      -> runs/circuit-report.json
-uv run amygdala circuit-plots   # README charts                            -> docs/img/
-uv run amygdala --batch-size 16 agent-eval  # agent loop, 5 runs per task -> runs/agent-eval.json
+uv run amygdala drafts          # base-model replies, runs/drafts.json
+uv run amygdala sensors         # amygdala and cingulate sensors
+uv run amygdala targets         # teacher calls from the outside rethink
+uv run amygdala train           # the prefrontal block, runs/circuit/
+uv run amygdala circuit-eval    # conditions, lesions, controls, 2-step
+uv run amygdala circuit-report  # intervals, McNemar, AUROC, identity
+uv run amygdala circuit-plots   # README charts, docs/img/
+uv run amygdala --batch-size 16 agent-eval  # agent loop, 5 runs per task
 uv run pytest                   # unit tests, no GPU needed
 ```
 
