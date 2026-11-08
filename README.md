@@ -303,3 +303,23 @@ tests/             circuit, steering hook, probe, and statistics tests
 - Snell et al., 2022, [Learning by Distilling Context](https://arxiv.org/abs/2209.15189): training a model to behave, without a prompt, as it would with that prompt. Here the "prompt" is the pause message and the student is the circuit.
 - Rimsky et al., 2024, [Steering Llama 2 via Contrastive Activation Addition](https://arxiv.org/abs/2312.06681): the steering used in the first attempt.
 - Arditi et al., 2024, [Refusal in Language Models Is Mediated by a Single Direction](https://arxiv.org/abs/2406.11717): the directional ablation used in the sister project.
+
+## License
+
+Copyright (c) 2026 Cleverson Ledur. The code, data, and trained weights in this repository are released under the [PolyForm Strict License 1.0.0](LICENSE). You can read, run, and study them for noncommercial purposes, such as research, teaching, or personal study. You can't redistribute them, change them, or build new works on them without written permission. For other uses, contact the author through [GitHub](https://github.com/cleversonledur).
+
+The base model, [Qwen2.5-1.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct), keeps its Apache 2.0 license.
+
+## Citation
+
+If you use or refer to this work, cite it as follows:
+
+```bibtex
+@misc{ledur2026amygdala,
+  author       = {Ledur, Cleverson},
+  title        = {llm-amygdala: a brain-inspired circuit inside a language model that makes an agent inspect before it destroys},
+  year         = {2026},
+  howpublished = {\url{https://github.com/cleversonledur/llm-amygdala}},
+  note         = {GitHub repository}
+}
+```
